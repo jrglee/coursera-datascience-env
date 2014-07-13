@@ -1,0 +1,21 @@
+- hosts: all
+  gather_facts: yes
+  sudo: True
+
+  tasks:
+    - name: Upgrade system
+      apt: upgrade=dist update_cache=yes
+
+    - name: Install packages
+      apt: name={{ item }} state=latest update_cache=yes
+      with_items:
+        - git
+        - vim
+        - rake
+        - nmon
+        - curl
+        - python-pip
+        - sqlite3
+
+    - name: Install oauth
+      pip: name=oauth2
